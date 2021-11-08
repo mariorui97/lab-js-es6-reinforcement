@@ -1,15 +1,19 @@
 // ***************************************************************************
 // Iteration 1 - `for...of` loop
 // ***************************************************************************
+let {usersArray} = require('./data') //importing an array from data.js and descontructing
 
-const getFirstNames = arr => {
+const getFirstNames = arr => { 
   const userFirstNames = [];
-  for (let user of arr) {
-    // Your code goes here ...
+  for (let user of arr) { 
+    userFirstNames.push(user.firstName) //pushing firstName's value of user key
   }
+  return userFirstNames;
 };
 
-getFirstNames(usersArray);
+getFirstNames(usersArray); //inputing the arr parameter as usersArray
+
+
 // expected output:
 // [ 'Kirby', 'Tracie', 'Kendra', 'Kinney', 'Howard', 'Rachelle', 'Lizzie' ]
 
@@ -18,7 +22,11 @@ getFirstNames(usersArray);
 // ***************************************************************************
 
 const getFullNames = arr => {
-  // Your code goes here ...
+  const userFullNames = [];
+  for (let user of arr){
+    userFullNames.push((user.firstName)+' '+(user.lastName))
+  }
+return userFullNames;
 };
 
 getFullNames(usersArray);
@@ -31,7 +39,15 @@ getFullNames(usersArray);
 // ***************************************************************************
 
 const getUsersCreditDetails = arr => {
-  // Your code goes here ...
+
+  let creditDetails = []
+  for (let user of arr){
+    let {firstName, lastName, balance} = user;
+
+    let filteredUsers = {firstName, lastName, balance}
+
+    creditDetails.push(filteredUsers);   
+  }
 };
 
 getUsersCreditDetails(usersArray);
@@ -49,7 +65,23 @@ getUsersCreditDetails(usersArray);
 // ***************************************************************************
 
 const genderView = users => {
-  // Your code goes here ...
+  let {firstName, lastName, gender} = users;
+
+  let maleUsers = users.filter(user => {
+    return user.gender == 'male' 
+  })
+
+  let femaleUsers = users.filter(user => {
+    return user.gender == 'female' 
+  })
+
+  let femaleNames = getFullNames(femaleUsers);
+  let maleNames = getFullNames(maleUsers);
+  
+ return {
+   femaleNames,
+   maleNames
+ }
 };
 
 genderView(usersArray);
